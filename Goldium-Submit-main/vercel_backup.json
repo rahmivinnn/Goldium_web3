@@ -2,16 +2,7 @@
   "version": 2,
   "buildCommand": "vite build",
   "outputDirectory": "dist",
-  "functions": {
-    "api/*.js": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
-    },
     {
       "src": "/(.*\\.(js|css|png|svg|ico|jpg|woff2|ttf))",
       "dest": "/$1"
