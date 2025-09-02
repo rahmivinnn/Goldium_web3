@@ -1,0 +1,116 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="dragonBody" cx="0.3" cy="0.3" r="0.8">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="50%" stop-color="#FFA500"/>
+      <stop offset="100%" stop-color="#FF6347"/>
+    </radialGradient>
+    <radialGradient id="dragonWings" cx="0.2" cy="0.2" r="0.7">
+      <stop offset="0%" stop-color="#FFE55C"/>
+      <stop offset="70%" stop-color="#FFD700"/>
+      <stop offset="100%" stop-color="#FFA500"/>
+    </radialGradient>
+    <radialGradient id="dragonEyes" cx="0.3" cy="0.3" r="0.6">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="50%" stop-color="#87CEEB"/>
+      <stop offset="100%" stop-color="#4169E1"/>
+    </radialGradient>
+    <filter id="dragonGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Shadow -->
+  <ellipse cx="64" cy="115" rx="30" ry="6" fill="#00000025"/>
+  
+  <!-- Dragon wings (back) -->
+  <g transform="translate(64,70)">
+    <ellipse cx="-25" cy="-10" rx="15" ry="25" fill="url(#dragonWings)" opacity="0.8" transform="rotate(-20)">
+      <animateTransform attributeName="transform" type="rotate" values="-20;-15;-20" dur="3s" repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse cx="25" cy="-10" rx="15" ry="25" fill="url(#dragonWings)" opacity="0.8" transform="rotate(20)">
+      <animateTransform attributeName="transform" type="rotate" values="20;15;20" dur="3s" repeatCount="indefinite" begin="0.5s"/>
+    </ellipse>
+  </g>
+  
+  <!-- Dragon body -->
+  <ellipse cx="64" cy="80" rx="20" ry="25" fill="url(#dragonBody)" filter="url(#dragonGlow)"/>
+  
+  <!-- Dragon head -->
+  <circle cx="64" cy="55" r="18" fill="url(#dragonBody)" filter="url(#dragonGlow)"/>
+  
+  <!-- Dragon snout -->
+  <ellipse cx="64" cy="65" rx="8" ry="6" fill="url(#dragonBody)"/>
+  
+  <!-- Dragon eyes -->
+  <circle cx="58" cy="50" r="4" fill="url(#dragonEyes)"/>
+  <circle cx="70" cy="50" r="4" fill="url(#dragonEyes)"/>
+  <circle cx="58" cy="49" r="2" fill="#000000"/>
+  <circle cx="70" cy="49" r="2" fill="#000000"/>
+  <circle cx="59" cy="48" r="1" fill="#FFFFFF"/>
+  <circle cx="71" cy="48" r="1" fill="#FFFFFF"/>
+  
+  <!-- Dragon nostrils -->
+  <ellipse cx="62" cy="67" rx="1" ry="2" fill="#8B4513"/>
+  <ellipse cx="66" cy="67" rx="1" ry="2" fill="#8B4513"/>
+  
+  <!-- Dragon horns -->
+  <polygon points="58,40 60,35 62,40" fill="#FFD700"/>
+  <polygon points="66,40 68,35 70,40" fill="#FFD700"/>
+  
+  <!-- Dragon tail -->
+  <path d="M 84 85 Q 95 90 100 95 Q 105 100 95 105 Q 90 100 85 95" fill="url(#dragonBody)" opacity="0.9">
+    <animateTransform attributeName="transform" type="rotate" values="0 84 85;5 84 85;0 84 85" dur="2s" repeatCount="indefinite"/>
+  </path>
+  
+  <!-- Dragon legs -->
+  <ellipse cx="55" cy="100" rx="4" ry="8" fill="url(#dragonBody)"/>
+  <ellipse cx="73" cy="100" rx="4" ry="8" fill="url(#dragonBody)"/>
+  
+  <!-- Dragon claws -->
+  <g fill="#8B4513">
+    <ellipse cx="53" cy="107" rx="1" ry="3"/>
+    <ellipse cx="57" cy="107" rx="1" ry="3"/>
+    <ellipse cx="71" cy="107" rx="1" ry="3"/>
+    <ellipse cx="75" cy="107" rx="1" ry="3"/>
+  </g>
+  
+  <!-- Golden aura sparkles -->
+  <g opacity="0.8">
+    <circle cx="35" cy="45" r="2" fill="#FFFF00">
+      <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="cy" values="45;40;45" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="95" cy="60" r="1.5" fill="#FFD700">
+      <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite" begin="0.5s"/>
+      <animate attributeName="cx" values="95;100;95" dur="1.5s" repeatCount="indefinite" begin="0.5s"/>
+    </circle>
+    <circle cx="75" cy="30" r="1" fill="#FFFF00">
+      <animate attributeName="opacity" values="0;1;0" dur="1.8s" repeatCount="indefinite" begin="1s"/>
+    </circle>
+    <circle cx="45" cy="85" r="1.5" fill="#FFD700">
+      <animate attributeName="opacity" values="0;1;0" dur="2.2s" repeatCount="indefinite" begin="0.3s"/>
+    </circle>
+  </g>
+  
+  <!-- Breathing fire effect (small) -->
+  <g opacity="0.6">
+    <ellipse cx="75" cy="67" rx="3" ry="2" fill="#FF4500">
+      <animate attributeName="rx" values="3;6;3" dur="1s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;0.9;0.6" dur="1s" repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse cx="78" cy="68" rx="2" ry="1" fill="#FFD700">
+      <animate attributeName="rx" values="2;4;2" dur="1s" repeatCount="indefinite" begin="0.2s"/>
+    </ellipse>
+  </g>
+  
+  <!-- Magical energy ring -->
+  <circle cx="64" cy="70" r="35" fill="none" stroke="#FFD700" stroke-width="1" opacity="0.3">
+    <animate attributeName="r" values="30;40;30" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.1;0.4;0.1" dur="4s" repeatCount="indefinite"/>
+  </circle>
+</svg>
