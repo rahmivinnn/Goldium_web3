@@ -1,0 +1,125 @@
+Tambahkan fitur edukasi "Learn Blockchain Solana", analitik Twitter, harga token GOLD realtime, dan pemantauan transaksi langsung ke dalam dashboard DeFi Goldium. Sistem tetap tidak mengganggu fitur penting seperti Phantom Wallet connect, staking, swap, dan send. UI berbasis React/Next.js + TailwindCSS.
+
+🔹 1. 📚 Modul Interaktif: Learn Blockchain Solana
+Ganti topik dari belajar Bahasa Inggris ke belajar konsep blockchain di Solana.
+
+Komponen baru: SolanaLearnCard.tsx
+
+Fetch konten belajar dari:
+
+Tweet edukasi dari akun seperti @solana, @soldevtools, @solana_news via Twitter API v2
+
+Tambahkan tips dasar: TPS, validator, smart contract, token SPL, Phantom Wallet, Serum, Raydium, dll.
+
+Tampilkan dalam bentuk card interaktif dengan animasi flip/expand dan polling otomatis 1x/jam.
+
+Tambahkan kuis kecil (opsional) menggunakan opsi ABC di tiap card.
+
+tsx
+Copy
+Edit
+// Example: <SolanaLearnCard />
+Title: "What is an SPL Token?"
+Content: "SPL Token is Solana’s version of ERC20."
+Quiz: [ ] ERC20 ( ) ETH2 ( ) SPL
+🔹 2. 📊 Analitik Twitter Token GOLDIUM
+Komponen: GoldiumSentimentTrends.tsx
+
+Embed tweet feed @goldiumofficial (gunakan react-twitter-embed).
+
+Fetch semua mention tweet dengan kata kunci: "Goldium", "GOLD", atau contract address: ApkBg8kzMBpVKxvgrw67vkd5KuGWqSu2GVb19eK4pump.
+
+Tampilkan:
+
+Jumlah tweet 24 jam terakhir
+
+Sentimen: Positif / Netral / Negatif
+
+Grafik bar/line tren harian via Chart.js / Recharts
+
+Tampilkan badge visual berdasarkan tren positif:
+
+jsx
+Copy
+Edit
+<GrowthBadge sentiment="positive" />
+🔹 3. 💰 Harga Token GOLD Realtime
+Komponen: GoldPriceWidget.tsx
+
+Fetch langsung dari:
+
+Solana RPC endpoint untuk pool SOL–GOLD
+
+Backup: Jupiter Aggregator API (jup.ag) atau Raydium SDK
+
+Hitung:
+GOLD price = SOL Reserve / GOLD Reserve, lalu ambil SOL–USD dari CoinGecko
+
+Refresh otomatis setiap 15 detik
+
+Styling bergaya neon glowing widget
+
+jsx
+Copy
+Edit
+1 GOLD ≈ 0.000045 SOL (≈ $0.0075)
+🔹 4. 📡 Real-time Transaction Feed (Send / Swap / Stake)
+Komponen: GoldiumTxFeed.tsx
+
+Subscribe event dari Solana node:
+
+Transfer = SEND
+
+DEX Interaction = SWAP (via Raydium/Jupiter logs)
+
+Staking = jika pakai smart contract staking terpisah (pastikan ada event listener)
+
+Backend listener: Node.js dengan @solana/web3.js (optional WebSocket)
+
+Simpan transaksi ke Supabase/Firebase
+
+Tampilkan riwayat transaksi + badge jenis:
+
+jsx
+Copy
+Edit
+[Tx Type] | [Time] | [Amount] | [User]
+[SWAP]    | 21:20  | 1200 GOLD | H7Ds...pmp
+🔧 Struktur Komponen
+Komponen	File Name	Letak UI
+Learn Blockchain	components/SolanaLearnCard.tsx	Atas/bawah saldo
+Twitter Analytics	components/GoldiumSentimentTrends.tsx	Sidebar kanan
+Token Price Widget	components/GoldPriceWidget.tsx	Samping saldo/token
+Transaksi Feed	components/GoldiumTxFeed.tsx	Bawah panel swap/send
+
+💾 Backend API Endpoints (optional, pakai Edge Function / Replit server)
+Endpoint	Fungsi
+/api/gold-price	Ambil harga GOLD (GOLD/SOL + SOL/USD)
+/api/tx-feed	Ambil daftar transaksi real-time
+/api/edu-feed	Fetch edukasi blockchain dari Twitter
+
+🎨 Styling
+Gunakan TailwindCSS dark theme
+
+Tambahkan animasi: glowing, pulse saat price update
+
+Komponen edukasi punya animasi swipe/flip/kartu kuis
+
+✅ Poin Penting
+🟩 Semua komponen modular dan lazy-loaded
+
+🟩 Tidak mengganggu staking, wallet, swap, send
+
+🟩 Bisa disisipkan di layout mana pun dengan props
+
+🟩 Siap di-deploy di Replit / Vercel / Netlify
+
+Kalau kamu ingin langsung:
+
+🎯 Kode untuk SolanaLearnCard.tsx
+
+📦 API handler fetch harga GOLD dari Jupiter
+
+📡 WebSocket handler untuk memonitor CA
+
+📊 Chart analytics dari tweet

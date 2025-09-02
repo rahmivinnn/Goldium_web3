@@ -1,0 +1,95 @@
+🔧 Add these interactive and API-based functionalities:
+1. 🎮 Immersive Lighting Canvas with three.js or babylon.js
+Use three.js or babylon.js to render a 3D canvas for the room layout tool
+
+Allow dynamic lighting previews with real-time shadows and reflections
+
+Users can rotate the view in 3D (basic orbit controls)
+
+Lights dropped on canvas should emit visible glow
+
+Optional: add material toggle (warm/cool tone, brightness slider)
+
+2. 🛒 Shopify Storefront API Integration
+Connect to Shopify using Storefront API (dummy token OK)
+
+Fetch product list dynamically: lighting fixtures, lamps, chandeliers, etc.
+
+Each item must have:
+
+Image
+
+Title
+
+Description
+
+Price
+
+Variant selector (size, material)
+
+Allow “Add to Cart” directly from canvas
+
+Cart persists in session and syncs with Shopify checkout
+
+3. 🤖 ChatGPT API Integration (OpenAI)
+Use ChatGPT API to create a smart product assistant
+
+Trigger via floating chat icon
+
+Let the assistant help users with:
+
+Product recommendations based on room style
+
+Lighting tips
+
+Common user questions like “How to create cozy lighting?”
+
+Tone should be helpful, friendly, and brand-matching
+
+Use dummy API key for now (sk-demo-key) if needed
+
+4. 🔐 Firebase or Supabase Authentication & Storage (Dummy Mode OK)
+Setup dummy Firebase or Supabase backend for:
+
+User login (email or Google)
+
+Save/load room designs (as JSON/image URL)
+
+Retrieve user history and favorites
+
+Use Realtime Database or Supabase Tables for design records
+
+Structure:
+
+bash
+Copy
+Edit
+users/
+  userID/
+    savedDesigns/
+      designID: {
+        imageURL,
+        components,
+        timestamp
+      }
+Login flow:
+
+Simple modal login
+
+If not logged in, show “Please log in to save your design”
+
+Use dummy tokens and fake user IDs for testing
+
+📦 BONUS: Modular Plugin Handling
+Each plugin should be self-contained
+
+Use lazy loading for three.js and Shopify API components
+
+If any plugin fails, fallback gracefully with alert or simplified UI
+
+🧪 Notes for Builder:
+DO NOT use default AI-generated layouts or placeholders.
+
+All interactive features must feel engineered with UX in mind.
+
+Animations must be smooth, not janky or randomly injected.

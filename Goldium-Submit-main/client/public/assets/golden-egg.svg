@@ -1,0 +1,46 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="eggGradient" cx="0.3" cy="0.3" r="0.8">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="50%" stop-color="#FFA500"/>
+      <stop offset="100%" stop-color="#FF8C00"/>
+    </radialGradient>
+    <radialGradient id="shine" cx="0.2" cy="0.2" r="0.4">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Shadow -->
+  <ellipse cx="64" cy="110" rx="25" ry="8" fill="#00000020"/>
+  
+  <!-- Main egg body -->
+  <ellipse cx="64" cy="75" rx="35" ry="45" fill="url(#eggGradient)" filter="url(#glow)"/>
+  
+  <!-- Metallic shine -->
+  <ellipse cx="55" cy="60" rx="15" ry="20" fill="url(#shine)"/>
+  
+  <!-- Golden sparkles -->
+  <g opacity="0.8">
+    <circle cx="45" cy="50" r="2" fill="#FFFF00">
+      <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="85" cy="65" r="1.5" fill="#FFFF00">
+      <animate attributeName="opacity" values="0;1;0" dur="1.5s" repeatCount="indefinite" begin="0.5s"/>
+    </circle>
+    <circle cx="70" cy="45" r="1" fill="#FFFF00">
+      <animate attributeName="opacity" values="0;1;0" dur="1.8s" repeatCount="indefinite" begin="1s"/>
+    </circle>
+  </g>
+  
+  <!-- Decorative golden bands -->
+  <ellipse cx="64" cy="65" rx="30" ry="2" fill="#FFD700" opacity="0.6"/>
+  <ellipse cx="64" cy="85" rx="25" ry="1.5" fill="#FFD700" opacity="0.4"/>
+</svg>

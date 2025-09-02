@@ -1,0 +1,64 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Build project
+      run: npm run build
+      
+    - name: Deploy to Vercel
+      uses: amondnet/vercel-action@v25
+      id: vercel-deploy
+      with:
+        vercel-token: ${{ secrets.VERCEL_TOKEN }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        vercel-args: '--prod'
+        vercel-org-id: ${{ secrets.ORG_ID }}
+        vercel-project-id: ${{ secrets.PROJECT_ID }}
+        working-directory: ./
+        
+    - name: Save Deployment URL
+      run: |
+        echo "Deployment URL: ${{ steps.vercel-deploy.outputs.preview-url }}"
+        echo "${{ steps.vercel-deploy.outputs.preview-url }}" > vercel-url.txt
+        
+    - name: Update README with Live URL
+      run: |
+        DEPLOY_URL="${{ steps.vercel-deploy.outputs.preview-url }}"
+        if [ -f "README.md" ]; then
+          if grep -q "## 🌐 Live Demo" README.md; then
+            sed -i "/## 🌐 Live Demo/,/^## /c\## 🌐 Live Demo\n[View Live Application]($DEPLOY_URL)\n" README.md
+          else
+            echo "" >> README.md
+            echo "## 🌐 Live Demo" >> README.md
+            echo "[View Live Application]($DEPLOY_URL)" >> README.md
+          fi
+        fi
+        
+    - name: Commit URL updates
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add vercel-url.txt README.md
+        git diff --staged --quiet || git commit -m "Auto-update: Add Vercel deployment URL"
+        git push || echo "No changes to push"

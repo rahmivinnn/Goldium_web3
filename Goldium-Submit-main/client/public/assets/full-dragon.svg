@@ -1,0 +1,158 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="goldenDragonBody" cx="0.3" cy="0.3" r="0.8">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="40%" stop-color="#FFA500"/>
+      <stop offset="80%" stop-color="#FF6347"/>
+      <stop offset="100%" stop-color="#8B0000"/>
+    </radialGradient>
+    <radialGradient id="goldenWings" cx="0.2" cy="0.2" r="0.8">
+      <stop offset="0%" stop-color="#FFFF00"/>
+      <stop offset="30%" stop-color="#FFD700"/>
+      <stop offset="70%" stop-color="#FFA500"/>
+      <stop offset="100%" stop-color="#FF4500"/>
+    </radialGradient>
+    <radialGradient id="fireGradient" cx="0.5" cy="0.8" r="0.6">
+      <stop offset="0%" stop-color="#FFD700"/>
+      <stop offset="30%" stop-color="#FF6347"/>
+      <stop offset="70%" stop-color="#FF4500"/>
+      <stop offset="100%" stop-color="#8B0000"/>
+    </radialGradient>
+    <filter id="legendaryGlow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="fireGlow">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Shadow -->
+  <ellipse cx="64" cy="120" rx="40" ry="5" fill="#00000030"/>
+  
+  <!-- Fire aura background -->
+  <g opacity="0.7">
+    <ellipse cx="64" cy="65" rx="50" ry="60" fill="url(#fireGradient)" opacity="0.3" filter="url(#fireGlow)">
+      <animate attributeName="rx" values="45;55;45" dur="3s" repeatCount="indefinite"/>
+      <animate attributeName="ry" values="55;65;55" dur="3s" repeatCount="indefinite"/>
+    </ellipse>
+  </g>
+  
+  <!-- Dragon wings (majestic) -->
+  <g transform="translate(64,60)">
+    <path d="M -35 -5 Q -50 -15 -45 -30 Q -40 -35 -25 -25 Q -15 -15 -20 0 Z" fill="url(#goldenWings)" filter="url(#legendaryGlow)">
+      <animateTransform attributeName="transform" type="rotate" values="-10;-5;-10" dur="4s" repeatCount="indefinite"/>
+    </path>
+    <path d="M 35 -5 Q 50 -15 45 -30 Q 40 -35 25 -25 Q 15 -15 20 0 Z" fill="url(#goldenWings)" filter="url(#legendaryGlow)">
+      <animateTransform attributeName="transform" type="rotate" values="10;5;10" dur="4s" repeatCount="indefinite" begin="0.5s"/>
+    </path>
+  </g>
+  
+  <!-- Dragon body (powerful) -->
+  <ellipse cx="64" cy="75" rx="25" ry="30" fill="url(#goldenDragonBody)" filter="url(#legendaryGlow)"/>
+  
+  <!-- Dragon neck -->
+  <ellipse cx="64" cy="50" rx="12" ry="20" fill="url(#goldenDragonBody)" filter="url(#legendaryGlow)"/>
+  
+  <!-- Dragon head (majestic) -->
+  <ellipse cx="64" cy="35" rx="20" ry="18" fill="url(#goldenDragonBody)" filter="url(#legendaryGlow)"/>
+  
+  <!-- Dragon snout -->
+  <ellipse cx="64" cy="45" rx="10" ry="8" fill="url(#goldenDragonBody)"/>
+  
+  <!-- Dragon eyes (fierce) -->
+  <ellipse cx="58" cy="30" rx="5" ry="6" fill="#FF0000" opacity="0.9">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="70" cy="30" rx="5" ry="6" fill="#FF0000" opacity="0.9">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite" begin="0.3s"/>
+  </ellipse>
+  <ellipse cx="58" cy="29" rx="2" ry="3" fill="#FFFF00"/>
+  <ellipse cx="70" cy="29" rx="2" ry="3" fill="#FFFF00"/>
+  
+  <!-- Dragon horns (crown-like) -->
+  <polygon points="54,20 56,10 58,20" fill="#FFD700" filter="url(#legendaryGlow)"/>
+  <polygon points="60,18 62,8 64,18" fill="#FFD700" filter="url(#legendaryGlow)"/>
+  <polygon points="64,18 66,8 68,18" fill="#FFD700" filter="url(#legendaryGlow)"/>
+  <polygon points="70,20 72,10 74,20" fill="#FFD700" filter="url(#legendaryGlow)"/>
+  
+  <!-- Dragon nostrils (breathing fire) -->
+  <ellipse cx="61" cy="47" rx="2" ry="3" fill="#8B0000"/>
+  <ellipse cx="67" cy="47" rx="2" ry="3" fill="#8B0000"/>
+  
+  <!-- Powerful tail -->
+  <path d="M 89 80 Q 105 85 115 90 Q 125 95 120 105 Q 115 110 105 105 Q 95 100 90 90" fill="url(#goldenDragonBody)" filter="url(#legendaryGlow)">
+    <animateTransform attributeName="transform" type="rotate" values="0 89 80;8 89 80;0 89 80" dur="3s" repeatCount="indefinite"/>
+  </path>
+  
+  <!-- Dragon legs (strong) -->
+  <ellipse cx="50" cy="100" rx="6" ry="12" fill="url(#goldenDragonBody)" filter="url(#legendaryGlow)"/>
+  <ellipse cx="78" cy="100" rx="6" ry="12" fill="url(#goldenDragonBody)" filter="url(#legendaryGlow)"/>
+  
+  <!-- Dragon claws (sharp) -->
+  <g fill="#8B0000">
+    <polygon points="46,110 48,115 50,110" />
+    <polygon points="50,110 52,115 54,110" />
+    <polygon points="74,110 76,115 78,110" />
+    <polygon points="78,110 80,115 82,110" />
+  </g>
+  
+  <!-- Legendary fire breath -->
+  <g opacity="0.8">
+    <ellipse cx="80" cy="47" rx="8" ry="4" fill="#FFD700" filter="url(#fireGlow)">
+      <animate attributeName="rx" values="8;15;8" dur="1.5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="1.5s" repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse cx="88" cy="48" rx="6" ry="3" fill="#FF6347" filter="url(#fireGlow)">
+      <animate attributeName="rx" values="6;12;6" dur="1.5s" repeatCount="indefinite" begin="0.2s"/>
+    </ellipse>
+    <ellipse cx="95" cy="49" rx="4" ry="2" fill="#FF4500" filter="url(#fireGlow)">
+      <animate attributeName="rx" values="4;8;4" dur="1.5s" repeatCount="indefinite" begin="0.4s"/>
+    </ellipse>
+  </g>
+  
+  <!-- Legendary sparkles and energy -->
+  <g opacity="0.9">
+    <circle cx="25" cy="30" r="3" fill="#FFFF00">
+      <animate attributeName="opacity" values="0;1;0" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="2;4;2" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="105" cy="40" r="2.5" fill="#FFD700">
+      <animate attributeName="opacity" values="0;1;0" dur="1.8s" repeatCount="indefinite" begin="0.4s"/>
+      <animate attributeName="cy" values="40;35;40" dur="1.8s" repeatCount="indefinite" begin="0.4s"/>
+    </circle>
+    <circle cx="90" cy="20" r="2" fill="#FFFF00">
+      <animate attributeName="opacity" values="0;1;0" dur="2.2s" repeatCount="indefinite" begin="0.8s"/>
+    </circle>
+    <circle cx="35" cy="90" r="2.5" fill="#FFD700">
+      <animate attributeName="opacity" values="0;1;0" dur="1.6s" repeatCount="indefinite" begin="0.6s"/>
+    </circle>
+    <circle cx="15" cy="65" r="2" fill="#FFFF00">
+      <animate attributeName="opacity" values="0;1;0" dur="2.4s" repeatCount="indefinite" begin="1.2s"/>
+    </circle>
+  </g>
+  
+  <!-- Legendary aura rings -->
+  <circle cx="64" cy="60" r="45" fill="none" stroke="#FFD700" stroke-width="2" opacity="0.4">
+    <animate attributeName="r" values="40;50;40" dur="5s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.2;0.6;0.2" dur="5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="64" cy="60" r="55" fill="none" stroke="#FF6347" stroke-width="1" opacity="0.3">
+    <animate attributeName="r" values="50;60;50" dur="6s" repeatCount="indefinite" begin="1s"/>
+    <animate attributeName="opacity" values="0.1;0.4;0.1" dur="6s" repeatCount="indefinite" begin="1s"/>
+  </circle>
+  
+  <!-- Crown effect -->
+  <g opacity="0.8">
+    <polygon points="64,5 66,15 68,5 70,15 72,5" fill="#FFFF00" filter="url(#legendaryGlow)">
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="3s" repeatCount="indefinite"/>
+    </polygon>
+  </g>
+</svg>

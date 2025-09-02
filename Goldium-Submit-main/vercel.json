@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+"routes": [
+  {
+    "src": "/(.*\\.js|.*\\.css|.*\\.png|.*\\.svg|.*\\.ico|.*\\.jpg|.*\\.woff2|.*\\.ttf)",
+    "dest": "/$1"
+  },
+  {
+    "src": "/(.*)",
+    "dest": "/index.html"
+  }
+]
+
+}

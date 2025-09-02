@@ -1,0 +1,76 @@
+🔥 1. Solana Shard Chase
+🎮 Genre: Real-Time Item Hunt
+💡 Konsep:
+Kamu adalah "hunter" di map 2D. Setiap 30 detik, muncul shard di posisi acak. Siapa cepat klik-nya (real-time multiplayer), dia dapet shard. Shard bisa ditukar jadi GOLD token.
+
+🔗 Blockchain:
+Phantom wallet
+
+Claim token pakai smart contract
+
+Peta bisa di-unlock via NFT
+
+🌟 Mirip Capture the Flag, tapi lebih simpel dan fast-paced
+UI: Top-down tilemap grid, clean sci-fi vibe
+Multiplayer pakai Colyseus + Replit backend
+
+🎲 2. SolFlip: On-Chain Memory Battle
+🎮 Genre: Memory Puzzle + Wagering
+💡 Konsep:
+Pemain taruhan token GOLD untuk masuk. Mereka harus mencocokkan kartu dengan waktu terbatas. Yang menyelesaikan tercepat menang dan dapat reward dari pool.
+
+🔗 Blockchain:
+GOLD pool untuk pemenang
+
+NFT booster: menambah waktu atau lihat kartu
+
+Result dicatat on-chain
+
+UI: Classic memory flip grid dengan efek mewah
+Teknologi: React + Zustand, Web3.js untuk transaksi
+
+🕳️ 3. GOLD Mine Escape
+🎮 Genre: Reaction + Trap Avoidance
+💡 Konsep:
+Kamu bekerja di tambang bawah tanah (2D side-scroller). Tugasmu: kumpulkan batu emas, hindari jebakan, dan selamatkan tokenmu ke permukaan. Kalau mati di tengah jalan, token hilang.
+
+🔗 Blockchain:
+GOLD sebagai nyawa / modal awal
+
+Smart contract menyimpan “loot” dan validasi escape
+
+Leaderboard on-chain
+
+Gaya: Dark pixel-art tambang, suara efek realistis
+Tantangan: Waktu & jebakan makin cepat per level
+
+🧠 4. SolQuiz Royale
+🎮 Genre: Multiplayer Quiz Battle
+💡 Konsep:
+20 pemain masuk satu room. Jawab kuis cepat (blockchain/web3/umum). Yang lambat langsung tereliminasi. Terakhir yang bertahan dapet hadiah NFT atau token GOLD.
+
+🔗 Blockchain:
+Smart contract validasi pemenang
+
+NFT tema SolQuiz (rare brain cards)
+
+GOLD fee masuk + reward
+
+UI: Full screen dynamic quiz, animasi countdown
+Tech: WebSocket / Colyseus + smart contract Solana
+
+💣 5. DeFi Dodger
+🎮 Genre: Reflex / Dodge Game (Top-down)
+💡 Konsep:
+Kamu adalah dompet Phantom yang harus menghindari serangan bug, scam token, rugpull, dan rekt candle yang jatuh. Semakin lama bertahan, semakin banyak GOLD kamu dapat.
+
+🔗 Blockchain:
+GOLD token reward per skor
+
+Power-up NFT seperti “Audit Shield” atau “Gas Booster”
+
+Skor disimpan on-chain
+
+Gaya lucu tapi dark satire, penuh referensi crypto
+Bisa tambah mode PvP juga
+

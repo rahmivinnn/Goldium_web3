@@ -1,0 +1,533 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goldium DeFi - SOL ↔ GOLD Exchange</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'defi-dark': '#0F0F23',
+                        'defi-secondary': '#1A1B3A',
+                        'defi-accent': '#2A2D5A',
+                        'gold-primary': '#FFD700',
+                        'gold-secondary': '#FFA500',
+                        'blue-primary': '#3B82F6',
+                        'blue-secondary': '#1D4ED8'
+                    },
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif']
+                    },
+                    backgroundImage: {
+                        'gold-gradient': 'linear-gradient(135deg, #FFD700 0%, #FFA500 100%)',
+                        'blue-gradient': 'linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)',
+                        'dark-gradient': 'linear-gradient(135deg, #0F0F23 0%, #1A1B3A 100%)'
+                    }
+                }
+            }
+        };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-defi-dark text-white font-inter min-h-screen">
+    <!-- Background Pattern -->
+    <div class="fixed inset-0 bg-dark-gradient"></div>
+    <div class="fixed inset-0 bg-gradient-to-br from-blue-primary/5 via-transparent to-gold-primary/5"></div>
+    
+    <!-- Main Container -->
+    <div class="relative min-h-screen">
+        <!-- Header -->
+        <header class="border-b border-defi-accent/30 backdrop-blur-sm bg-defi-secondary/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <!-- Logo -->
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 bg-gold-gradient rounded-full flex items-center justify-center">
+                            <i class="fas fa-coins text-defi-dark text-xl font-bold"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-xl font-bold bg-gold-gradient bg-clip-text text-transparent">Goldium</h1>
+                            <p class="text-xs text-gray-400">DeFi Exchange</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Wallet Connection -->
+                    <div class="flex items-center space-x-4">
+                        <!-- Network Status -->
+                        <div class="hidden md:flex items-center space-x-2 px-3 py-1 bg-green-500/20 rounded-full">
+                            <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                            <span class="text-sm text-green-400">Mainnet</span>
+                        </div>
+                        
+                        <!-- Wallet Button -->
+                        <button id="wallet-button" class="bg-blue-gradient hover:from-blue-600 hover:to-blue-700 px-6 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-lg">
+                            <span id="wallet-text">Connect Wallet</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Balance Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <!-- SOL Balance -->
+                <div class="bg-defi-secondary/80 backdrop-blur-sm border border-defi-accent/30 rounded-xl p-6 hover:border-blue-primary/50 transition-all duration-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-300">SOL Balance</h3>
+                        <i class="fab fa-solana text-blue-primary text-2xl"></i>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="text-3xl font-bold text-white" data-bind="solBalance">12.5684</p>
+                        <p class="text-sm text-gray-400">≈ $2,456.78 USD</p>
+                    </div>
+                </div>
+
+                <!-- GOLD Balance -->
+                <div class="bg-defi-secondary/80 backdrop-blur-sm border border-defi-accent/30 rounded-xl p-6 hover:border-gold-primary/50 transition-all duration-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-300">GOLD Balance</h3>
+                        <i class="fas fa-coins text-gold-primary text-2xl"></i>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="text-3xl font-bold text-white" data-bind="goldBalance">156.2890</p>
+                        <p class="text-sm text-gray-400">≈ $3,125.78 USD</p>
+                    </div>
+                </div>
+
+                <!-- Staked GOLD -->
+                <div class="bg-defi-secondary/80 backdrop-blur-sm border border-defi-accent/30 rounded-xl p-6 hover:border-green-500/50 transition-all duration-200">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-300">Staked GOLD</h3>
+                        <i class="fas fa-lock text-green-500 text-2xl"></i>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="text-3xl font-bold text-white" data-bind="stakedBalance">89.4570</p>
+                        <p class="text-sm text-green-400">10% APR • $1,789.14</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="bg-defi-secondary/80 backdrop-blur-sm border border-defi-accent/30 rounded-xl overflow-hidden mb-8">
+                <div class="flex border-b border-defi-accent/30">
+                    <button class="tab-button active flex-1 px-6 py-4 text-center font-medium transition-all duration-200" data-tab="swap">
+                        <i class="fas fa-exchange-alt mr-2"></i>Swap
+                    </button>
+                    <button class="tab-button flex-1 px-6 py-4 text-center font-medium transition-all duration-200" data-tab="send">
+                        <i class="fas fa-paper-plane mr-2"></i>Send
+                    </button>
+                    <button class="tab-button flex-1 px-6 py-4 text-center font-medium transition-all duration-200" data-tab="staking">
+                        <i class="fas fa-coins mr-2"></i>Staking
+                    </button>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="p-6">
+                    <!-- Swap Tab -->
+                    <div id="swap-tab" class="tab-content">
+                        <div class="max-w-md mx-auto space-y-6">
+                            <!-- From Token -->
+                            <div class="space-y-3">
+                                <label class="text-sm font-medium text-gray-300">From</label>
+                                <div class="bg-defi-accent/50 rounded-lg p-4 border border-defi-accent">
+                                    <div class="flex justify-between items-center mb-3">
+                                        <button class="flex items-center space-x-2 bg-defi-secondary px-3 py-2 rounded-lg border border-defi-accent hover:border-blue-primary/50 transition-colors">
+                                            <i class="fab fa-solana text-blue-primary"></i>
+                                            <span>SOL</span>
+                                            <i class="fas fa-chevron-down text-xs"></i>
+                                        </button>
+                                        <span class="text-sm text-gray-400">Balance: 12.5684</span>
+                                    </div>
+                                    <input type="number" placeholder="0.0" class="w-full bg-transparent text-2xl font-semibold outline-none" data-mock="true">
+                                </div>
+                            </div>
+
+                            <!-- Swap Arrow -->
+                            <div class="flex justify-center">
+                                <button class="bg-defi-accent hover:bg-defi-accent/80 p-3 rounded-full transition-all duration-200 transform hover:rotate-180">
+                                    <i class="fas fa-arrow-down text-gray-300"></i>
+                                </button>
+                            </div>
+
+                            <!-- To Token -->
+                            <div class="space-y-3">
+                                <label class="text-sm font-medium text-gray-300">To</label>
+                                <div class="bg-defi-accent/50 rounded-lg p-4 border border-defi-accent">
+                                    <div class="flex justify-between items-center mb-3">
+                                        <button class="flex items-center space-x-2 bg-defi-secondary px-3 py-2 rounded-lg border border-defi-accent hover:border-gold-primary/50 transition-colors">
+                                            <i class="fas fa-coins text-gold-primary"></i>
+                                            <span>GOLD</span>
+                                            <i class="fas fa-chevron-down text-xs"></i>
+                                        </button>
+                                        <span class="text-sm text-gray-400">Balance: 156.2890</span>
+                                    </div>
+                                    <input type="number" placeholder="0.0" class="w-full bg-transparent text-2xl font-semibold outline-none" data-mock="true" readonly>
+                                </div>
+                            </div>
+
+                            <!-- Swap Details -->
+                            <div class="bg-defi-accent/30 rounded-lg p-4 space-y-2">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-400">Rate</span>
+                                    <span>1 SOL = 12.43 GOLD</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-400">Slippage</span>
+                                    <span>0.5%</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-400">Network Fee</span>
+                                    <span>~0.000005 SOL</span>
+                                </div>
+                            </div>
+
+                            <!-- Swap Button -->
+                            <button class="w-full bg-gold-gradient hover:from-gold-secondary hover:to-yellow-600 py-4 rounded-lg font-semibold text-defi-dark transition-all duration-200 transform hover:scale-105 shadow-lg" data-event="click:handleSwap">
+                                Swap Tokens
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Send Tab -->
+                    <div id="send-tab" class="tab-content hidden">
+                        <div class="max-w-md mx-auto space-y-6">
+                            <!-- Token Selection -->
+                            <div class="space-y-3">
+                                <label class="text-sm font-medium text-gray-300">Select Token</label>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <button class="token-select active bg-blue-gradient p-4 rounded-lg text-center transition-all duration-200" data-token="SOL">
+                                        <i class="fab fa-solana text-2xl mb-2"></i>
+                                        <p class="font-medium">SOL</p>
+                                        <p class="text-xs opacity-80">12.5684</p>
+                                    </button>
+                                    <button class="token-select bg-defi-accent hover:bg-gold-gradient p-4 rounded-lg text-center transition-all duration-200" data-token="GOLD">
+                                        <i class="fas fa-coins text-2xl mb-2"></i>
+                                        <p class="font-medium">GOLD</p>
+                                        <p class="text-xs opacity-80">156.2890</p>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Recipient Address -->
+                            <div class="space-y-3">
+                                <label class="text-sm font-medium text-gray-300">Recipient Address</label>
+                                <input type="text" placeholder="Enter Solana wallet address" class="w-full bg-defi-accent/50 border border-defi-accent rounded-lg px-4 py-3 outline-none focus:border-blue-primary transition-colors" data-mock="true">
+                            </div>
+
+                            <!-- Amount -->
+                            <div class="space-y-3">
+                                <label class="text-sm font-medium text-gray-300">Amount</label>
+                                <div class="bg-defi-accent/50 rounded-lg p-4 border border-defi-accent">
+                                    <div class="flex justify-between items-center mb-3">
+                                        <span class="text-gray-400">Available: 12.5684 SOL</span>
+                                        <button class="text-blue-primary text-sm hover:underline">Max</button>
+                                    </div>
+                                    <input type="number" placeholder="0.0" class="w-full bg-transparent text-xl font-semibold outline-none" data-mock="true">
+                                </div>
+                            </div>
+
+                            <!-- Send Button -->
+                            <button class="w-full bg-blue-gradient hover:from-blue-600 hover:to-blue-700 py-4 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 shadow-lg" data-event="click:handleSend">
+                                Send Tokens
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Staking Tab -->
+                    <div id="staking-tab" class="tab-content hidden">
+                        <div class="max-w-2xl mx-auto space-y-6">
+                            <!-- Staking Stats -->
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                                <div class="bg-defi-accent/50 rounded-lg p-4 text-center">
+                                    <p class="text-2xl font-bold text-green-400">10%</p>
+                                    <p class="text-sm text-gray-400">Annual APR</p>
+                                </div>
+                                <div class="bg-defi-accent/50 rounded-lg p-4 text-center">
+                                    <p class="text-2xl font-bold text-gold-primary">89.46</p>
+                                    <p class="text-sm text-gray-400">GOLD Staked</p>
+                                </div>
+                                <div class="bg-defi-accent/50 rounded-lg p-4 text-center">
+                                    <p class="text-2xl font-bold text-blue-primary">2.45</p>
+                                    <p class="text-sm text-gray-400">Claimable Rewards</p>
+                                </div>
+                            </div>
+
+                            <!-- Staking Actions -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Stake -->
+                                <div class="bg-defi-accent/30 rounded-lg p-6">
+                                    <h3 class="text-lg font-semibold mb-4 flex items-center">
+                                        <i class="fas fa-lock mr-2 text-green-500"></i>Stake GOLD
+                                    </h3>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="text-sm text-gray-400 mb-2 block">Amount to Stake</label>
+                                            <input type="number" placeholder="0.0" class="w-full bg-defi-secondary border border-defi-accent rounded-lg px-4 py-3 outline-none focus:border-green-500 transition-colors" data-mock="true">
+                                            <p class="text-xs text-gray-400 mt-1">Available: 156.29 GOLD</p>
+                                        </div>
+                                        <button class="w-full bg-green-600 hover:bg-green-700 py-3 rounded-lg font-medium transition-all duration-200" data-event="click:handleStake">
+                                            Stake GOLD
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Unstake -->
+                                <div class="bg-defi-accent/30 rounded-lg p-6">
+                                    <h3 class="text-lg font-semibold mb-4 flex items-center">
+                                        <i class="fas fa-unlock mr-2 text-red-500"></i>Unstake GOLD
+                                    </h3>
+                                    <div class="space-y-4">
+                                        <div>
+                                            <label class="text-sm text-gray-400 mb-2 block">Amount to Unstake</label>
+                                            <input type="number" placeholder="0.0" class="w-full bg-defi-secondary border border-defi-accent rounded-lg px-4 py-3 outline-none focus:border-red-500 transition-colors" data-mock="true">
+                                            <p class="text-xs text-gray-400 mt-1">Staked: 89.46 GOLD</p>
+                                        </div>
+                                        <button class="w-full bg-red-600 hover:bg-red-700 py-3 rounded-lg font-medium transition-all duration-200" data-event="click:handleUnstake">
+                                            Unstake GOLD
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Claim Rewards -->
+                            <div class="bg-gold-gradient/10 border border-gold-primary/30 rounded-lg p-6">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <h3 class="text-lg font-semibold text-gold-primary">Claimable Rewards</h3>
+                                        <p class="text-2xl font-bold mt-1">2.4567 GOLD</p>
+                                        <p class="text-sm text-gray-400">≈ $49.13 USD</p>
+                                    </div>
+                                    <button class="bg-gold-gradient hover:from-gold-secondary hover:to-yellow-600 px-6 py-3 rounded-lg font-semibold text-defi-dark transition-all duration-200" data-event="click:handleClaim">
+                                        Claim Rewards
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Transaction History -->
+            <div class="bg-defi-secondary/80 backdrop-blur-sm border border-defi-accent/30 rounded-xl overflow-hidden">
+                <div class="px-6 py-4 border-b border-defi-accent/30">
+                    <h3 class="text-lg font-semibold flex items-center">
+                        <i class="fas fa-history mr-2 text-blue-primary"></i>Recent Transactions
+                    </h3>
+                </div>
+                <div class="divide-y divide-defi-accent/30">
+                    <!-- @MAP: transactions.map(tx => ( -->
+                    <div class="px-6 py-4 hover:bg-defi-accent/20 transition-colors">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-green-500/20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-exchange-alt text-green-500"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Swap SOL → GOLD</p>
+                                    <p class="text-sm text-gray-400">2 minutes ago</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-medium">+24.86 GOLD</p>
+                                <a href="#" class="text-sm text-blue-primary hover:underline" data-mock="true">View on Solscan</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_MAP )) -->
+                    
+                    <div class="px-6 py-4 hover:bg-defi-accent/20 transition-colors">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-blue-500/20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-paper-plane text-blue-500"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Send SOL</p>
+                                    <p class="text-sm text-gray-400">1 hour ago</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-medium">-5.0 SOL</p>
+                                <a href="#" class="text-sm text-blue-primary hover:underline" data-mock="true">View on Solscan</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="px-6 py-4 hover:bg-defi-accent/20 transition-colors">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <div class="w-10 h-10 bg-gold-primary/20 rounded-full flex items-center justify-center">
+                                    <i class="fas fa-lock text-gold-primary"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Stake GOLD</p>
+                                    <p class="text-sm text-gray-400">3 hours ago</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-medium">+50.0 GOLD</p>
+                                <a href="#" class="text-sm text-blue-primary hover:underline" data-mock="true">View on Solscan</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="bg-defi-secondary border border-defi-accent rounded-xl p-8 max-w-md mx-4">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-check text-green-500 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-semibold mb-2">Transaction Successful!</h3>
+                <p class="text-gray-400 mb-6">Your transaction has been confirmed on the blockchain.</p>
+                <div class="space-y-3">
+                    <button class="w-full bg-blue-gradient py-3 rounded-lg font-medium">View on Solscan</button>
+                    <button class="w-full bg-defi-accent hover:bg-defi-accent/80 py-3 rounded-lg font-medium transition-colors" onclick="closeModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Modal -->
+    <div id="loading-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="bg-defi-secondary border border-defi-accent rounded-xl p-8 max-w-md mx-4">
+            <div class="text-center">
+                <div class="w-16 h-16 border-4 border-blue-primary/30 border-t-blue-primary rounded-full animate-spin mx-auto mb-4"></div>
+                <h3 class="text-xl font-semibold mb-2">Processing Transaction</h3>
+                <p class="text-gray-400">Please wait while your transaction is being processed...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // TODO: Implement Solana Web3.js integration, wallet connection, and DeFi functionality
+        
+        (function() {
+            // Tab switching functionality
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabName = button.getAttribute('data-tab');
+                    
+                    // Remove active class from all buttons and hide all content
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.add('hidden'));
+                    
+                    // Add active class to clicked button and show corresponding content
+                    button.classList.add('active');
+                    document.getElementById(`${tabName}-tab`).classList.remove('hidden');
+                });
+            });
+
+            // Token selection for send tab
+            const tokenButtons = document.querySelectorAll('.token-select');
+            tokenButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    tokenButtons.forEach(btn => {
+                        btn.classList.remove('active', 'bg-blue-gradient', 'bg-gold-gradient');
+                        btn.classList.add('bg-defi-accent', 'hover:bg-gold-gradient');
+                    });
+                    
+                    button.classList.remove('bg-defi-accent', 'hover:bg-gold-gradient');
+                    button.classList.add('active');
+                    
+                    const token = button.getAttribute('data-token');
+                    if (token === 'SOL') {
+                        button.classList.add('bg-blue-gradient');
+                    } else {
+                        button.classList.add('bg-gold-gradient');
+                    }
+                });
+            });
+
+            // Modal functions
+            window.closeModal = function() {
+                document.getElementById('success-modal').classList.add('hidden');
+                document.getElementById('loading-modal').classList.add('hidden');
+            };
+
+            // Wallet connection simulation
+            const walletButton = document.getElementById('wallet-button');
+            const walletText = document.getElementById('wallet-text');
+            let isConnected = false;
+
+            walletButton.addEventListener('click', () => {
+                if (!isConnected) {
+                    // Show loading
+                    walletText.textContent = 'Connecting...';
+                    
+                    // Simulate connection delay
+                    setTimeout(() => {
+                        isConnected = true;
+                        walletText.textContent = '9WzD...x3fG';
+                        walletButton.classList.remove('bg-blue-gradient');
+                        walletButton.classList.add('bg-green-600', 'hover:bg-green-700');
+                    }, 2000);
+                } else {
+                    // Disconnect wallet
+                    isConnected = false;
+                    walletText.textContent = 'Connect Wallet';
+                    walletButton.classList.remove('bg-green-600', 'hover:bg-green-700');
+                    walletButton.classList.add('bg-blue-gradient');
+                }
+            });
+        })();
+    </script>
+
+    <style>
+        .tab-button.active {
+            background: linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%);
+            color: white;
+        }
+        
+        .tab-button:not(.active) {
+            color: #9CA3AF;
+        }
+        
+        .tab-button:not(.active):hover {
+            color: white;
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .token-select:not(.active):hover {
+            transform: scale(1.02);
+        }
+
+        /* Glassmorphism effect */
+        .backdrop-blur-sm {
+            backdrop-filter: blur(4px);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1A1B3A;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #3B82F6;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #1D4ED8;
+        }
+    </style>
+</body>
+</html>

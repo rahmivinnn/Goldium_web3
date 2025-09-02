@@ -1,0 +1,95 @@
+You're a fullstack blockchain developer working on a production-grade DeFi app on Solana Mainnet, coded entirely inside Replit.
+Build a full-featured SOL ↔ GOLD (Goldium token) DApp with:
+
+🔗 Wallet Integration:
+Support Phantom, Solflare, Backpack, and other Solana wallets.
+
+Use @solana/wallet-adapter with full mainnet support.
+
+Ensure persistent wallet connection & auto reconnect on refresh.
+
+Wallet must sign & approve all transactions properly.
+
+💱 Swap SOL ↔ GOLD:
+Implement a swap interface between native SOL and custom SPL token: GOLDIUM (GOLD).
+
+GOLD is an existing SPL token with custom mint address. Use this:
+GOLD_MINT_ADDRESS = "PASTE_YOUR_GOLD_MINT_ADDRESS_HERE"
+
+Calculate slippage (default 0.5%).
+
+Ensure SOL → GOLD and GOLD → SOL swaps are atomic and show estimated price before confirm.
+
+Display transaction history, status, and success message with clickable Solscan mainnet link.
+
+💸 Send / Transfer:
+Allow users to send SOL or GOLD to any valid Solana address.
+
+Show real-time balance in both tokens.
+
+Validate recipient address and amount.
+
+Show transaction hash + link to Solscan.
+
+🧠 Staking GOLD:
+Create a staking vault smart contract (or use SPL Stake Pool framework).
+
+Users can:
+
+Stake GOLD
+
+Unstake GOLD
+
+View staked balance
+
+See real-time APR (fixed e.g. 10%)
+
+Rewards must be claimable and appear in wallet.
+
+Show staking stats: total GOLD staked, wallet’s staking status, claimable reward.
+
+📡 On-chain Tracking:
+All transactions (swap, send, stake) must be visible & trackable on Solscan.
+
+After every action, show a button to view on Solscan.
+
+🖥 Frontend (React + Tailwind):
+Build a modern, responsive UI using React.js + TailwindCSS inside Replit.
+
+Use 3 main tabs: Swap, Send, Staking.
+
+Add clean button states, success modals, and real-time wallet feedback.
+
+Auto-refresh balances after each transaction.
+
+Highlight connected wallet address and allow disconnect.
+
+🧰 Backend / Contract Requirements:
+Use Solana Web3.js or Anchor framework.
+
+GOLD is SPL token, pre-minted and deployed to Solana mainnet.
+
+Use RPC like https://api.mainnet-beta.solana.com
+
+Ensure security: input validation, error handling, tx fail feedback.
+
+Integrate helper functions to:
+
+Get wallet balance (SOL & GOLD)
+
+Check transaction confirmations
+
+Track block explorer URLs
+
+✅ Additional:
+Use .env for storing config like GOLD_MINT_ADDRESS, RPC_URL, etc.
+
+If using Anchor smart contract for staking, deploy to mainnet and link it properly in frontend.
+
+All features must run fully inside Replit, including smart contract interaction (no external servers).
+
+Say:
+
+"You're building Goldium DeFi: a Solana-native app with real, working SOL ↔ GOLD swap, send, and staking features, wallet support, and Solscan tracking. All must work 100% on Solana mainnet inside Replit. Go!"
+
+Kalau kamu mau saya bantu:
