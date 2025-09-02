@@ -1,4 +1,4 @@
-{
+﻿{
   "version": 2,
   "buildCommand": "vite build",
   "outputDirectory": "dist",
@@ -9,8 +9,28 @@
   },
   "routes": [
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "src": "/api/test",
+      "dest": "/api/test.js"
+    },
+    {
+      "src": "/api/solana-rpc",
+      "dest": "/api/solana-rpc.js"
+    },
+    {
+      "src": "/api/users",
+      "dest": "/api/users.js"
+    },
+    {
+      "src": "/api/transactions",
+      "dest": "/api/transactions.js"
+    },
+    {
+      "src": "/api/portfolio",
+      "dest": "/api/portfolio.js"
+    },
+    {
+      "src": "/api/analytics",
+      "dest": "/api/analytics.js"
     },
     {
       "src": "/(.*\\.(js|css|png|svg|ico|jpg|woff2|ttf))",
